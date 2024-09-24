@@ -1,0 +1,98 @@
+<style>
+  .Layout {
+    & > header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      & > h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        & > a {
+          text-decoration: none;
+          color: currentColor;
+        }
+      }
+    }
+
+    & > nav {
+      background-color: #f4f4f4;
+      padding: 1rem;
+      & > ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        & > li {
+          margin: 0;
+          & > a {
+            text-decoration: none;
+            color: #333;
+            &[aria-current='page'] {
+              font-weight: bold;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+    & > .Content {
+      &:has(aside) {
+        display: grid;
+        grid-template-columns: 1fr 200px;
+        gap: 1rem;
+      }
+      & > main {
+        padding: 1rem;
+      }
+      & > aside {
+        padding: 1rem;
+        background-color: #f4f4f4;
+        & > h3 {
+          margin: 0;
+        }
+      }
+    }
+    & > footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+  }
+</style>
+<div class="Layout">
+  <header>
+    <h1>
+      <a href="./">RenderLayoutJs</a>
+    </h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="./">Home</a></li>
+      <li><a href="./template.html">Template</a></li>
+      <li><a href="./empty.html">Empty</a></li>
+      <li><a href="./vue.html">Vue</a></li>
+    </ul>
+  </nav>
+  <div class="Content">
+    <main>
+      <slot></slot>
+    </main>
+    <slot name="aside"></slot>
+  </div>
+  <footer>
+    <p>&copy; 2024 RenderLayoutJs</p>
+  </footer>
+</div>
+<script type="module">
+  console.log('Layout rendered!!')
+
+  document.querySelectorAll('nav a').forEach((a) => {
+    const isCurrent = a.href === location.href
+    a.setAttribute('aria-current', isCurrent ? 'page' : 'false')
+  })
+</script>
